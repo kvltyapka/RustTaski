@@ -1,8 +1,7 @@
-use chrono::Utc;
-use std::io;
-
 mod models;
+use chrono::Utc;
 use models::{Blog, Post};
+use std::io;
 
 fn new_post(blog: &mut Blog) {
     print!("{}[2J", 27 as char);
@@ -65,7 +64,29 @@ fn all_posts(blog: &Blog) {
         .expect("Failed to read line");
 }
 
-//fn detail_post() {}
+fn detail_post(blog: &Blog) {
+    print!("{}[2J", 27 as char);
+    println!("Enter the ID of the post:");
+    let mut id = String::new();
+    io::stdin().read_line(&mut id).expect("Failed to read line");
+    let id: u32 = id.trim().parse().expect("Please type a number!");
+
+    if let Some(post) = blog.posts.get(&id) {
+        println!("ID: {}", post.id);
+        println!("Title: {}", post.title);
+        println!("Author: {}", post.author);
+        println!("Date: {}", post.date);
+        println!("Content: {}", post.content);
+    } else {
+        println!("No post found with ID {}", id);
+    }
+
+    println!("Press Enter to continue...");
+    let mut pause = String::new();
+    io::stdin()
+        .read_line(&mut pause)
+        .expect("Failed to read line");
+}
 
 fn print_menu() {
     print!("{}[2J", 27 as char);
@@ -93,7 +114,7 @@ fn main() {
         match choice {
             1 => new_post(&mut blog),
             2 => all_posts(&blog),
-            //3 => detail_post(&blog),
+            3 => detail_post(&blog),
             _ => println!("Invalid option"),
         }
     }
