@@ -1,9 +1,12 @@
+use chrono::Utc;
 use std::io;
 
 mod models;
 use models::{Blog, Post};
 
 fn new_post(blog: &mut Blog) {
+    print!("{}[2J", 27 as char);
+
     let mut title = String::new();
     let mut author = String::new();
     let mut content = String::new();
@@ -35,37 +38,63 @@ fn new_post(blog: &mut Blog) {
     blog.next_id += 1;
 
     println!("Post added successfully!");
-    print_menu();
+
+    println!("Press Enter to continue...");
+    let mut pause = String::new();
+    io::stdin()
+        .read_line(&mut pause)
+        .expect("Failed to read line");
 }
 
-fn all_posts() {}
+fn all_posts(blog: &Blog) {
+    print!("{}[2J", 27 as char);
 
-fn detail_post() {}
+    for (id, post) in &blog.posts {
+        println!("ID: {}", id);
+        println!("Title: {}", post.title);
+        println!("Author: {}", post.author);
+        println!("Date: {}", post.date);
+        println!("Content: {}", post.content);
+        println!("---------------------------");
+    }
+
+    println!("Press Enter to continue...");
+    let mut pause = String::new();
+    io::stdin()
+        .read_line(&mut pause)
+        .expect("Failed to read line");
+}
+
+//fn detail_post() {}
 
 fn print_menu() {
-    println!("1. Add new post");
+    print!("{}[2J", 27 as char);
+    println!("\n1. Add new post");
     println!("2. All posts");
     println!("3. Detail post");
-
-    // обработка
-    let mut menu = String::new();
-
-    io::stdin()
-        .read_line(&mut menu)
-        .expect("Failed to read line");
-
-    let menu: u8 = menu.trim().parse().expect("Please type a number!");
-    match menu {
-        1 => {
-            let mut blog = Blog::new();
-            new_post(&mut blog);
-        }
-        2 => println!("all posts"),
-        3 => println!("detail post"),
-        _ => println!("Invalid option"),
-    }
 }
 
 fn main() {
-    print_menu();
+    let mut blog = Blog::new();
+
+    loop {
+        print_menu();
+        let mut choice = String::new();
+
+        io::stdin()
+            .read_line(&mut choice)
+            .expect("Failed to read line");
+
+        let choice: u8 = match choice.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        match choice {
+            1 => new_post(&mut blog),
+            2 => all_posts(&blog),
+            //3 => detail_post(&blog),
+            _ => println!("Invalid option"),
+        }
+    }
 }

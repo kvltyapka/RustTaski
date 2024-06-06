@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 use std::collections::HashMap;
+
 pub struct Post {
     pub id: u32,
     pub title: String,
