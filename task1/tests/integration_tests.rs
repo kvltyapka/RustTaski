@@ -1,5 +1,3 @@
-// models.rs
-
 use chrono::{DateTime, Utc};
 use std::collections::HashMap;
 use std::io;
@@ -26,8 +24,6 @@ impl Blog {
         }
     }
 }
-
-// main.rs
 
 fn read_input(prompt: &str) -> String {
     println!("{}", prompt);
