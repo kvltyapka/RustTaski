@@ -1,9 +1,6 @@
-/// Модуль `models` содержит определения структур `Blog` и `Post`.
-mod models;
 use chrono::Utc;
-/// Импорт необходимых структур из модуля `models`.
-use models::{Blog, Post};
 use std::io;
+use task1::{Blog, Post};
 
 /// Функция для чтения ввода пользователя.
 ///
