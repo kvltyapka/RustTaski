@@ -1,8 +1,23 @@
+/// Модуль `models` содержит определения структур `Blog` и `Post`.
 mod models;
 use chrono::Utc;
+/// Импорт необходимых структур из модуля `models`.
 use models::{Blog, Post};
 use std::io;
 
+/// Функция для чтения ввода пользователя.
+///
+/// # Arguments
+///
+/// * `prompt` - Строка, которая будет выведена перед чтением ввода.
+///
+/// # Returns
+///
+/// * `String` - Строка, введенная пользователем.
+///
+/// # Panics
+///
+/// * Если произошла ошибка при чтении ввода.
 fn read_input(prompt: &str) -> String {
     println!("{}", prompt);
     let mut input = String::new();
@@ -12,6 +27,15 @@ fn read_input(prompt: &str) -> String {
     input.trim().to_string()
 }
 
+/// Функция для создания нового поста.
+///
+/// # Arguments
+///
+/// * `blog` - Ссылка на блог, в который будет добавлен новый пост.
+///
+/// # Panics
+///
+/// * Если произошла ошибка при чтении ввода.
 fn new_post(blog: &mut Blog) {
     print!("{}[2J", 27 as char);
 
@@ -35,6 +59,11 @@ fn new_post(blog: &mut Blog) {
     read_input("Press Enter to continue...");
 }
 
+/// Функция для вывода информации о посте.
+///
+/// # Arguments
+///
+/// * `post` - Ссылка на пост, информацию о котором нужно вывести.
 fn print_post(post: &Post) {
     println!("ID: {}", post.id);
     println!("Title: {}", post.title);
@@ -44,6 +73,11 @@ fn print_post(post: &Post) {
     println!("---------------------------");
 }
 
+/// Функция для вывода информации обо всех постах в блоге.
+///
+/// # Arguments
+///
+/// * `blog` - Ссылка на блог, посты которого нужно вывести.
 fn all_posts(blog: &Blog) {
     print!("{}[2J", 27 as char);
 
@@ -54,6 +88,15 @@ fn all_posts(blog: &Blog) {
     read_input("Press Enter to continue...");
 }
 
+/// Функция для вывода детальной информации о посте по его ID.
+///
+/// # Arguments
+///
+/// * `blog` - Ссылка на блог, в котором нужно найти пост.
+///
+/// # Panics
+///
+/// * Если введенный ID не является числом.
 fn detail_post(blog: &Blog) {
     print!("{}[2J", 27 as char);
 
@@ -70,6 +113,7 @@ fn detail_post(blog: &Blog) {
     read_input("Press Enter to continue...");
 }
 
+/// Функция для вывода меню.
 fn print_menu() {
     print!("{}[2J", 27 as char);
     println!("\n1. Add new post");
@@ -78,6 +122,7 @@ fn print_menu() {
     println!("4. Exit\n");
 }
 
+/// Главная функция, запускающая цикл обработки ввода пользователя.
 fn main() {
     let mut blog = Blog::new();
 

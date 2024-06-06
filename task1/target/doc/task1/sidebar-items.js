@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["all_posts","detail_post","main","new_post","print_menu","print_post","read_input"],"mod":["models"]};
