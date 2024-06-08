@@ -1,1 +1,0 @@
-C:\Users\basss\OneDrive\Рабочий\ стол\RustRabota\task1\target\debug\task1.exe: C:\Users\basss\OneDrive\Рабочий\ стол\RustRabota\task1\src\lib.rs C:\Users\basss\OneDrive\Рабочий\ стол\RustRabota\task1\src\main.rs

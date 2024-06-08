@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["chrono","num_traits","task1","windows_targets","windows_x86_64_msvc"];
