@@ -12,3 +12,8 @@ pub struct Client {
     pub id: u32,
     pub balance: Arc<RwLock<u32>>,
 }
+
+pub struct Transaction {
+    pub client_id: u32,
+    pub amount: u32,
+}
