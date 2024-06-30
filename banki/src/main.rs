@@ -153,8 +153,6 @@ fn main() {
         bank_thread(bank2, rx2, banks2);
     });
 
-    // Функция для запроса баланса у банка
-
     println!(
         "Initial Balance of Bank 1, Account 1: {}",
         request_balance(&tx1, 1)
