@@ -121,6 +121,17 @@ fn bank_thread(
     }
 }
 
+fn request_balance(sender: &Sender<Transaction>, account_id: u32) -> i64 {
+    let (response_tx, response_rx) = mpsc::channel();
+    sender
+        .send(Transaction::GetBalance {
+            account_id,
+            response: response_tx,
+        })
+        .unwrap();
+    response_rx.recv().unwrap()
+}
+
 fn main() {
     let bank1 = Bank::new(1);
     let bank2 = Bank::new(2);
@@ -143,16 +154,6 @@ fn main() {
     });
 
     // Функция для запроса баланса у банка
-    fn request_balance(sender: &Sender<Transaction>, account_id: u32) -> i64 {
-        let (response_tx, response_rx) = mpsc::channel();
-        sender
-            .send(Transaction::GetBalance {
-                account_id,
-                response: response_tx,
-            })
-            .unwrap();
-        response_rx.recv().unwrap()
-    }
 
     println!(
         "Initial Balance of Bank 1, Account 1: {}",
